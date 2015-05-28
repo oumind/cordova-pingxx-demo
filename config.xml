@@ -5,6 +5,7 @@
     <author>oumind</author>
     <keywords>pingxx,pay,demo</keywords>
     <license>Apache 2.0 License</license>
-
     <content src="index.html" />
+    <access origin="*" />
+
 </widget>

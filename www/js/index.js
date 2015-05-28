@@ -16,6 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var callback = {
+    success: function(message) {
+        alert(message);
+    },
+    
+    failure: function() {
+        alert("Error calling pingxx Plugin");
+    }
+}
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -33,30 +43,30 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
 
-        var success = function(message) {
-            alert(message);
-        }
-
-        var failure = function() {
-            alert("Error calling Hello Plugin");
-        }
-
-        pingxx.createPayment("use alipay", success, failure);
-
+        $('.up').on('click', function(e){
+            
+            $.ajax({
+               type: 'POST',
+               url: 'http://10.246.40.125:8010/pay',//TODO YOUR-IP like 192.168.10.10
+               data: JSON.stringify({
+                    "channel": $(this).data('channel'),
+                    "amount": $('#amount').val()*100
+                }),
+               contentType: 'application/json',
+               success: function(charge){
+                    pingxx.createPayment(JSON.stringify(charge), callback.success, callback.failure);
+               },
+               error: function(xhr, type){
+                   alert('Ajax error!')
+               }
+            });
+        })
+        
+        $(document).on("pingxx-pay-finished", function(event){
+            alert(event.result);
+        },false);
     },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
 };
 
 app.initialize();
