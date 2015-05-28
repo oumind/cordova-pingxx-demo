@@ -16,16 +16,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var callback = {
-    success: function(message) {
-        alert(message);
-    },
-    
-    failure: function() {
-        alert("Error calling pingxx Plugin");
-    }
-}
-
 var app = {
     // Application Constructor
     initialize: function() {
@@ -48,14 +38,14 @@ var app = {
             
             $.ajax({
                type: 'POST',
-               url: 'http://10.246.40.125:8010/pay',//TODO YOUR-IP like 192.168.10.10
+               url: 'http://YOUR-IP:8010/pay',//TODO YOUR-IP like 192.168.10.10
                data: JSON.stringify({
                     "channel": $(this).data('channel'),
                     "amount": $('#amount').val()*100
                 }),
                contentType: 'application/json',
                success: function(charge){
-                    pingxx.createPayment(JSON.stringify(charge), callback.success, callback.failure);
+                    pingxx.createPayment(charge);
                },
                error: function(xhr, type){
                    alert('Ajax error!')
