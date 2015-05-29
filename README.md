@@ -19,8 +19,13 @@
 4. add ios platform
 
         cordova platform add ios
+        
+5. change code www/js/index.js
 
-5. run the code
+              pingxx.createPayment(charge, 'YOUR-URL-SCHEME');//TODO YOUR-URL-SCHEME is what in this command you hava specified
+                                                                        // $cordova plugin add ../cordova-plugin-pingxx/ --variable URL_SCHEME=YOUR-URL-SCHEME
+
+6. run the code
 
         $cordova run
         
