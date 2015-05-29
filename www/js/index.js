@@ -45,7 +45,8 @@ var app = {
                 }),
                contentType: 'application/json',
                success: function(charge){
-                    pingxx.createPayment(charge);
+                    pingxx.createPayment(charge, 'YOUR-URL-SCHEME');//TODO YOUR-URL-SCHEME is what in this command you hava specified
+                                                                    // $cordova plugin add ../cordova-plugin-pingxx/ --variable URL_SCHEME=YOUR-URL-SCHEME
                },
                error: function(xhr, type){
                    alert('Ajax error!')
