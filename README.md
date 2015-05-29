@@ -21,6 +21,8 @@
         cordova platform add ios
         
 5. change code www/js/index.js
+                
+              url: 'http://YOUR-IP:8010/pay',//TODO YOUR-IP like 192.168.10.10
 
               pingxx.createPayment(charge, 'YOUR-URL-SCHEME');//TODO YOUR-URL-SCHEME is what in this command you hava specified
                                                                         // $cordova plugin add ../cordova-plugin-pingxx/ --variable URL_SCHEME=YOUR-URL-SCHEME
